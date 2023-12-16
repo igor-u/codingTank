@@ -1,0 +1,47 @@
+import java.util.Scanner;
+
+public class Avaliacao1 {
+
+	public static void main(String[] args) {
+		
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Digite o valor do empréstimo: ");
+		double valorEmprestimo = sc.nextDouble();
+		
+		System.out.println("Digite a taxa de juros do empréstimo: ");
+		double juros_mensal = sc.nextDouble();
+		
+		System.out.println("Digite o tempo para pagamento: ");
+		int total_de_meses = sc.nextInt();
+		
+		double total_saldo_devedor = valorEmprestimo;
+		
+		double amortizacao = total_saldo_devedor / total_de_meses;
+		
+		double parcela_mensal = juros_mensal + amortizacao;
+		
+		double saldo_devedor = valorEmprestimo;
+		
+		double juros = saldo_devedor*juros_mensal/100;
+		
+		double juros_total = 0;
+		
+		double prestacao = 0;
+		double totalPrestacao = 0;
+		
+		System.out.printf("Valor fixo da amortização R$ %.2f, Saldo devedor total R$ %.2f com um juros de %.2f%% ao mês\n\n", amortizacao, valorEmprestimo, juros_mensal);
+		
+		for (int i = 1; i <= total_de_meses; i++) {
+			 juros_total += juros;
+			 prestacao = amortizacao+juros;
+			 totalPrestacao += prestacao;
+			 saldo_devedor = saldo_devedor - amortizacao;
+			 System.out.printf("Parcela %d | Juros: R$ %.2f | Prestação: R$ %.2f | Saldo devedor: R$ %.2f\n", i, juros, prestacao, saldo_devedor);
+			 juros = saldo_devedor*juros_mensal/100;
+			 
+		}
+		
+		System.out.printf("\nTotal: Prestação: R$ %.2f, Juros: R$ %.2f, Amortização R$ %.2f", totalPrestacao, juros_total, valorEmprestimo);
+	}
+
+}
